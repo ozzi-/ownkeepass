@@ -64,7 +64,8 @@ OwnKeepassSettings::OwnKeepassSettings(const QString filePath, OwnKeepassHelper 
     m_fastUnlockRetryCount(2),
     m_uiOrientation(0),
     m_settings(new Settings(filePath, parent)),
-    m_recentDatabaseModel(new settingsPrivate::RecentDatabaseListModel(m_recentDatabaseListLength))
+    m_recentDatabaseModel(new settingsPrivate::RecentDatabaseListModel(m_recentDatabaseListLength)),
+    m_wantOtp(false)
 {
     qDebug() << "ownKeepass version: " << m_version;
     loadSettings();
@@ -508,6 +509,16 @@ void OwnKeepassSettings::setFastUnlock(const bool value)
         emit fastUnlockChanged();
     }
 }
+
+void OwnKeepassSettings::setWantOtp(const bool value)
+{
+    if (value != m_wantOtp) {
+        m_wantOtp = value;
+        m_settings->setValue("settings/wantOtp", QVariant(m_wantOtp));
+        emit wantOtpChanged();
+    }
+}
+
 
 void OwnKeepassSettings::setFastUnlockRetryCount(const int value)
 {
