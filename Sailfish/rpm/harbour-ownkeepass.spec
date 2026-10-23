@@ -48,16 +48,14 @@ AINote: TOTP support developed with AI, but code human-reviewed.
 %setup -q -n %{name}-%{version}/Sailfish
 
 %build
-
-%qtc_qmake5  \
-    VERSION=%{version}
-
-%qtc_make %{?_smp_mflags}
+cd %{_builddir}/%{name}-%{version}/Sailfish
+qmake ownKeepass.pro VERSION=%{version}
+make
 
 %install
 rm -rf %{buildroot}
-
-%qmake5_install
+cd %{_builddir}/%{name}-%{version}/Sailfish
+make INSTALL_ROOT=%{buildroot} install
 
 %files
 %defattr(-,root,root,-)
