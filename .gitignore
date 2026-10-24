@@ -9,3 +9,4 @@ Sailfish/moc_*.cpp
 Sailfish/qrc_*.cpp
 Sailfish/Makefile
 Sailfish/harbour-ownkeepass
+dist/
